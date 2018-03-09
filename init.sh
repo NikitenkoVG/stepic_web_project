@@ -1,4 +1,5 @@
-sudo apt-get update && apt-get install -y nginx mc curl && 
+#apt-get update && apt-get install -y nginx mc curl python-pip git gunicorn && 
 sudo rm /etc/nginx/sites-available/default && 
 sudo ln -sf /home/box/web/etc/nginx.conf /etc/nginx/sites-available/default && 
-sudo /etc/init.d/nginx restart
+/etc/init.d/nginx restart &&
+gunicorn --log-file error_logs.log --access-logfile acclogs -b 0.0.0.0:8080 -D -c /home/box/web/hello.py hello:app &
